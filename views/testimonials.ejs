@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Customer Reviews</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <link rel="stylesheet" href="/css/testimonial.css" />
+    <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+
+<!-- Reviews Hero Section -->
+<section class="page-hero">
+    <div class="container">
+        <h1>Customer Reviews</h1>
+        <p>Share your experience and read what others have to say about their adventures with us</p>
+    </div>
+</section>
+
+<!-- Reviews Display Section -->
+<section class="reviews-display">
+    <div class="container">
+        <div class="reviews-header">
+            <div class="reviews-stats">
+                <div class="average-rating">
+                    <span class="rating-number"><%= Number(averageRating).toFixed(1) %></span>
+
+                    <div class="stars">
+                        <%
+                        let fullStars = Math.floor(averageRating);
+                        let halfStar = (averageRating - fullStars) >= 0.5;
+                        for (let i = 1; i <= 5; i++) {
+                        if (i <= fullStars) { %>
+                            <i class="fas fa-star"></i>
+                        <% } else if (i === fullStars + 1 && halfStar) { %>
+                            <i class="fas fa-star-half-alt"></i>
+                        <% } else { %>
+                            <i class="far fa-star"></i>
+                        <% }
+                        } %>
+                    </div>
+                    <span class="total-reviews">Based on <%= totalReviews %> reviews</span>
+                </div>
+            </div>
+
+            <div class="reviews-filter">
+                <select id="sortReviews">
+                    <option value="newest" <%= sort === 'newest' ? 'selected' : '' %>>Newest First</option>
+                    <option value="highest" <%= sort === 'highest' ? 'selected' : '' %>>Highest Rated</option>
+                    <option value="lowest" <%= sort === 'lowest' ? 'selected' : '' %>>Lowest Rated</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="reviews-grid">
+            <% reviews.forEach(review => { %>
+                <div class="review-card">
+                    <div class="review-header">
+                        <div class="reviewer-info">
+                            <h3><%= review.name %></h3>
+                            <span class="reviewer-country"><%= review.country %></span>
+                        </div>
+                        <div class="review-rating">
+                            <% for (let i = 1; i <= 5; i++) { %>
+                                <% if (i <= review.stars) { %>
+                                    <i class="fas fa-star"></i>
+                                <% } else { %>
+                                    <i class="far fa-star"></i>
+                                <% } %>
+                            <% } %>
+                        </div>
+                    </div>
+                    <p class="review-text"><%= review.review %></p>
+                    <span class="review-date"><%= new Date(review.created_at).toDateString() %></span>
+                </div>
+            <% }); %>
+        </div>
+
+        <!-- Pagination -->
+        <div class="pagination">
+            <% if (currentPage > 1) { %>
+                <a href="/testimonials?page=<%= currentPage - 1 %>&sort=<%= sort %>" class="pagination-btn prev"><i class="fas fa-chevron-left"></i> Prev</a>
+            <% } %>
+
+            <% for(let i = 1; i <= totalPages; i++) { %>
+                <a href="/testimonials?page=<%= i %>&sort=<%= sort %>" class="pagination-btn <%= (i === currentPage) ? 'active' : '' %>"><%= i %></a>
+            <% } %>
+
+            <% if (currentPage < totalPages) { %>
+                <a href="/testimonials?page=<%= currentPage + 1 %>&sort=<%= sort %>" class="pagination-btn next">Next <i class="fas fa-chevron-right"></i></a>
+            <% } %>
+        </div>
+    </div>
+</section>
+
+<!-- Review Form Section -->
+<section class="review-form-section">
+    <div class="container">
+        <div class="section-header">
+            <h2>Share Your Experience</h2>
+            <p class="section-subtitle">Tell us about your adventure - your feedback helps us improve and inspires others!</p>
+        </div>
+
+        <form class="review-form" id="reviewForm" action="/testimonials" method="POST">
+            <div class="form-group">
+                <label for="reviewerName">Your Name</label>
+                <input type="text" id="reviewerName" name="reviewerName" required />
+            </div>
+
+            <div class="form-group">
+                <label for="country">Country</label>
+                <input type="text" id="country" name="country" required />
+            </div>
+
+            <div class="form-group">
+                <label>Rating</label>
+                <div class="star-rating">
+                    <input type="radio" id="star5" name="rating" value="5" required />
+                    <label for="star5" title="5 stars"><i class="fas fa-star"></i></label>
+
+                    <input type="radio" id="star4" name="rating" value="4" />
+                    <label for="star4" title="4 stars"><i class="fas fa-star"></i></label>
+
+                    <input type="radio" id="star3" name="rating" value="3" />
+                    <label for="star3" title="3 stars"><i class="fas fa-star"></i></label>
+
+                    <input type="radio" id="star2" name="rating" value="2" />
+                    <label for="star2" title="2 stars"><i class="fas fa-star"></i></label>
+
+                    <input type="radio" id="star1" name="rating" value="1" />
+                    <label for="star1" title="1 star"><i class="fas fa-star"></i></label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="reviewText">Your Review</label>
+                <textarea id="reviewText" name="reviewText" rows="5" required></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-submit">Submit Review</button>
+        </form>
+    </div>
+</section>
+
+<!-- Sorting JavaScript -->
+<script>
+    document.getElementById('sortReviews').addEventListener('change', function () {
+        const sortValue = this.value;
+        const urlParams = new URLSearchParams(window.location.search);
+        urlParams.set('sort', sortValue);
+        urlParams.set('page', 1); // Reset to page 1 on filter change
+        window.location.href = `${window.location.pathname}?${urlParams.toString()}`;
+    });
+</script>
+
+
+
+</body>
+</html>

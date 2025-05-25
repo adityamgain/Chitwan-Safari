@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking Confirmed - Chitwan Adventures</title>
+    <link rel="stylesheet" href="/css/booking.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        .success-section {
+            text-align: center;
+            padding: 100px 20px;
+        }
+
+        .success-icon {
+            font-size: 5rem;
+            color: var(--accent-color);
+            margin-bottom: 30px;
+        }
+
+        .success-message {
+            max-width: 600px;
+            margin: 0 auto 40px;
+        }
+
+        .success-message h1 {
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            font-size: 2.5rem;
+        }
+
+        .success-message p {
+            color: #666;
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        .next-steps {
+            background: var(--light-bg);
+            padding: 30px;
+            border-radius: 15px;
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: left;
+        }
+
+        .next-steps h2 {
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+
+        .next-steps ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .next-steps li {
+            margin-bottom: 15px;
+            padding-left: 30px;
+            position: relative;
+        }
+
+        .next-steps li i {
+            position: absolute;
+            left: 0;
+            top: 5px;
+            color: var(--secondary-color);
+        }
+
+        .action-buttons {
+            margin-top: 40px;
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--secondary-color);
+            color: var(--secondary-color);
+        }
+
+        .btn-outline:hover {
+            background: var(--secondary-color);
+            color: var(--white);
+        }
+    </style>
+</head>
+<body>
+
+    <section class="success-section">
+        <div class="container">
+            <i class="fas fa-check-circle success-icon"></i>
+            <div class="success-message">
+                <h1>Booking Confirmed!</h1>
+                <p>Thank you for choosing Chitwan Adventures. Your booking has been successfully processed. We're excited to welcome you!</p>
+            </div>
+            <div class="next-steps">
+                <h2>What's Next?</h2>
+                <ul>
+                    <li>
+                        <i class="fas fa-envelope"></i>
+                        <strong>Check your email</strong> for a detailed confirmation and itinerary
+                    </li>
+                    <li>
+                        <i class="fas fa-clock"></i>
+                        <strong>Review your schedule</strong> and make note of your activity times
+                    </li>
+                    <li>
+                        <i class="fas fa-phone"></i>
+                        <strong>Contact us</strong> if you need to make any changes to your booking
+                    </li>
+                    <li>
+                        <i class="fas fa-info-circle"></i>
+                        <strong>Read our FAQ</strong> for important information about your activities
+                    </li>
+                </ul>
+            </div>
+            <div class="action-buttons">
+                <a href="/" class="btn btn-outline">Return Home</a>
+                <a href="/activities" class="btn">View Activities</a>
+            </div>
+        </div>
+    </section>
+
+
+</body>
+</html> 

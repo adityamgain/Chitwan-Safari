@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Your Adventure - Chitwan Adventures</title>
+    <link rel="stylesheet" href="/css/booking.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <section class="booking-hero">
+        <div class="container">
+            <h1>Book Your Adventure</h1>
+            <p>Select your preferred activities and dates to create your perfect Chitwan experience</p>
+        </div>
+    </section>
+
+    <section class="booking-section">
+        <div class="container">
+            <form id="bookingForm" class="booking-form" action="/bookings" method="POST">
+                <div class="form-grid">
+                    <!-- Personal Information -->
+                    <div class="form-section">
+                        <h2>Personal Information</h2>
+                        <div class="form-group">
+                            <label for="fullName">Full Name</label>
+                            <input type="text" id="fullName" name="fullName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" id="phone" name="phone" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="country">Country</label>
+                            <input type="text" id="country" name="country" required>
+                        </div>
+                    </div>
+
+                    <!-- Activity Selection -->
+                    <div class="form-section">
+                        <h2>Select Activities</h2>
+                        <div class="activities-grid">
+                            <div class="activity-card">
+                                <input type="checkbox" id="jungleSafari" name="activities" value="jungleSafari">
+                                <label for="jungleSafari">
+                                    <i class="fas fa-car"></i>
+                                    <span>Jungle Safari</span>
+                                    <small>4-6 hours</small>
+                                </label>
+                            </div>
+                            <div class="activity-card">
+                                <input type="checkbox" id="canoeing" name="activities" value="canoeing">
+                                <label for="canoeing">
+                                    <i class="fas fa-water"></i>
+                                    <span>Canoeing Adventure</span>
+                                    <small>2-3 hours</small>
+                                </label>
+                            </div>
+                            <div class="activity-card">
+                                <input type="checkbox" id="jungleWalk" name="activities" value="jungleWalk">
+                                <label for="jungleWalk">
+                                    <i class="fas fa-hiking"></i>
+                                    <span>Guided Jungle Walk</span>
+                                    <small>3-4 hours</small>
+                                </label>
+                            </div>
+                            <div class="activity-card">
+                                <input type="checkbox" id="birdWatching" name="activities" value="birdWatching">
+                                <label for="birdWatching">
+                                    <i class="fas fa-dove"></i>
+                                    <span>Bird Watching</span>
+                                    <small>2-5 hours</small>
+                                </label>
+                            </div>
+                            <div class="activity-card">
+                                <input type="checkbox" id="tharuCommunity" name="activities" value="tharuCommunity">
+                                <label for="tharuCommunity">
+                                    <i class="fas fa-users"></i>
+                                    <span>Tharu Community Experience</span>
+                                    <small>2-4 hours</small>
+                                </label>
+                            </div>
+                            <div class="activity-card">
+                                <input type="checkbox" id="homestay" name="activities" value="homestay">
+                                <label for="homestay">
+                                    <i class="fas fa-home"></i>
+                                    <span>Tharu Homestay</span>
+                                    <small>1+ nights</small>
+                                </label>
+                            </div>
+                            <div class="activity-card">
+                                <input type="checkbox" id="cycling" name="activities" value="cycling">
+                                <label for="cycling">
+                                    <i class="fas fa-bicycle"></i>
+                                    <span>Cycling Tour</span>
+                                    <small>2-3 hours</small>
+                                </label>
+                            </div>
+                            <div class="activity-card">
+                                <input type="checkbox" id="vultureRestaurant" name="activities" value="vultureRestaurant">
+                                <label for="vultureRestaurant">
+                                    <i class="fas fa-crow"></i>
+                                    <span>Vulture Restaurant Visit</span>
+                                    <small>1-2 hours</small>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Date and Time -->
+                    <div class="form-section">
+                        <h2>Schedule</h2>
+                        <div class="form-group">
+                            <label for="startDate">Start Date</label>
+                            <input type="date" id="startDate" name="startDate" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="endDate">End Date</label>
+                            <input type="date" id="endDate" name="endDate" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="preferredTime">Preferred Time</label>
+                            <select id="preferredTime" name="preferredTime" required>
+                                <option value="">Select preferred time</option>
+                                <option value="morning">Morning (6:00 AM - 12:00 PM)</option>
+                                <option value="afternoon">Afternoon (12:00 PM - 5:00 PM)</option>
+                                <option value="evening">Evening (5:00 PM - 8:00 PM)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Additional Information -->
+                    <div class="form-section">
+                        <h2>Additional Information</h2>
+                        <div class="form-group">
+                            <label for="participants">Number of Participants</label>
+                            <input type="number" id="participants" name="participants" min="1" max="20" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="specialRequirements">Special Requirements</label>
+                            <textarea id="specialRequirements" name="specialRequirements" rows="4" placeholder="Any dietary restrictions, accessibility needs, or other requirements?"></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary">Proceed to Payment</button>
+                </div>
+            </form>
+        </div>
+    </section>
+
+
+    <script>
+        // Set minimum date to today
+        const today = new Date().toISOString().split('T')[0];
+        document.getElementById('startDate').min = today;
+        document.getElementById('endDate').min = today;
+
+        // Ensure end date is after start date
+        document.getElementById('startDate').addEventListener('change', function() {
+            document.getElementById('endDate').min = this.value;
+        });
+    </script>
+</body>
+</html>
