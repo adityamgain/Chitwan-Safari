@@ -1,0 +1,319 @@
+:root {
+    --primary-color: #5a9149;
+    --secondary-color: #ed7022;
+    --accent-color: #27ae60;
+    --text-color: #333;
+    --light-bg: #f8f9fa;
+    --white: #ffffff;
+    --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --transition: all 0.3s ease;
+
+}
+
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background-color: var(--light-bg);
+    color: var(--text-color);
+    line-height: 1.6;
+}
+
+.hero {
+    background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('../images/sunset.jpeg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    height: 60vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: var(--white);
+    padding: 0 20px;
+}
+
+.hero h1 {
+    font-size: 3.5rem;
+    margin-bottom: 1.5rem;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+.hero p {
+    font-size: 1.2rem;
+    max-width: 800px;
+    margin-bottom: 2rem;
+}
+
+.btn {
+    display: inline-block;
+    padding: 12px 30px;
+    background-color: var(--secondary-color);
+    color: var(--white);
+    text-decoration: none;
+    border-radius: 30px;
+    font-weight: 500;
+    transition: var(--transition);
+    border: none;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background-color: #d35400;
+    transform: translateY(-3px);
+    box-shadow: var(--shadow);
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 50px 20px;
+}
+
+.activity-row {
+    display: flex;
+    align-items: stretch;
+    margin-bottom: 80px;
+    background: var(--white);
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+    position: relative;
+}
+
+.activity-row:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+}
+
+.activity-row.reverse {
+    flex-direction: row-reverse;
+}
+
+.activity-image {
+    flex: 1;
+    min-height: 500px;
+    overflow: hidden;
+    position: relative;
+}
+
+.activity-image::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(to right, rgba(0,0,0,0.1), rgba(0,0,0,0));
+    z-index: 1;
+}
+
+.activity-row.reverse .activity-image::before {
+    background: linear-gradient(to left, rgba(0,0,0,0.1), rgba(0,0,0,0));
+}
+
+.activity-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: var(--transition);
+}
+
+.activity-row:hover .activity-image img {
+    transform: scale(1.05);
+}
+
+.activity-content {
+    flex: 1;
+    padding: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+}
+
+.activity-title {
+    font-size: 2.2rem;
+    margin-bottom: 25px;
+    color: var(--primary-color);
+    position: relative;
+    padding-bottom: 15px;
+}
+
+.activity-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 60px;
+    height: 3px;
+    background: var(--secondary-color);
+}
+
+.activity-description {
+    color: #666;
+    margin-bottom: 30px;
+    font-size: 1.1rem;
+    line-height: 1.8;
+}
+
+.activity-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    position: absolute;
+    bottom: 50px;
+    left: 0;
+    padding: 0 50px;
+}
+
+.activity-duration {
+    display: flex;
+    align-items: center;
+    color: var(--secondary-color);
+    font-weight: 500;
+    font-size: 1.1rem;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 8px 15px;
+    border-radius: 20px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.activity-duration i {
+    margin-right: 10px;
+    font-size: 1.2rem;
+}
+
+.btn {
+    display: inline-block;
+    padding: 15px 35px;
+    background-color: var(--secondary-color);
+    color: var(--white);
+    text-decoration: none;
+    border-radius: 30px;
+    font-weight: 500;
+    transition: var(--transition);
+    border: none;
+    cursor: pointer;
+    font-size: 1.1rem;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.btn:hover {
+    background-color: #d35400;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+
+
+.cta-section {
+    text-align: center;
+    padding: 80px 20px;
+    background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+    color: var(--white);
+}
+
+.cta-section h2 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+}
+
+.cta-section p {
+    max-width: 600px;
+    margin: 0 auto 30px;
+    font-size: 1.1rem;
+}
+
+.cta-buttons {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+}
+
+.btn-outline {
+    background: transparent;
+    border: 2px solid var(--white);
+}
+
+.btn-outline:hover {
+    background: var(--white);
+    color: var(--primary-color);
+}
+
+/* Call to Action */
+.cta {
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('../images/hero-bg.jpeg') no-repeat center center/cover;
+    color: var(--white);
+    height:25rem;
+    display: flex; /* enables flex layout */
+    justify-content: center; /* horizontal center */
+    align-items: center; /* vertical center */
+    text-align: center;
+}
+
+.cta h2 {
+    color: var(--white);
+}
+
+.cta p {
+    max-width: 700px;
+    margin: 0 auto 30px;
+    font-size: 1.1rem;
+}
+
+.cta-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+@media (max-width: 768px) {
+    .hero h1 {
+        font-size: 2.5rem;
+    }
+
+    .hero p {
+        font-size: 1rem;
+    }
+
+    .activity-row {
+        flex-direction: column;
+        margin-bottom: 50px;
+    }
+
+    .activity-row.reverse {
+        flex-direction: column;
+    }
+
+    .activity-image {
+        min-height: 300px;
+        width: 100%;
+    }
+
+    .activity-content {
+        padding: 30px;
+    }
+
+    .activity-meta {
+        position: static;
+        padding: 20px 0 0;
+        flex-direction: column;
+        gap: 20px;
+        align-items: flex-start;
+    }
+
+    .btn {
+        width: 100%;
+        text-align: center;
+    }
+}
