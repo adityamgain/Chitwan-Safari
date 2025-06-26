@@ -1,8 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-// EJS view routes
-router.get('/', (req, res) => res.render('home'));
+// EJS view routes\
 router.get('/activities', (req, res) => res.render('activities'));
 router.get('/activities/safari', (req, res) => res.render('safari'));
 router.get('/activities/canoeing', (req, res) => res.render('canoening'));
@@ -15,5 +14,8 @@ router.get('/activities/jatayou-restaurant', (req, res) => res.render('jatayou-r
 router.get('/booking', (req, res) => res.render('booking'));
 router.get('/bookings', (req, res) => res.render('booking-success'));
 router.get('/testimonials', (req, res) => res.render('testimonials'));
+router.get('/visuals', (req, res) => res.render('visuals'));
+router.get('/about-us', (req, res) => res.render('about-us'));
+
 
 module.exports = router;

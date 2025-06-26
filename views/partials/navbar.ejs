@@ -1,8 +1,23 @@
-<link rel="stylesheet" href="/css/navbar.css">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WildLife Safari - Navbar with Logo</title>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./css/navbar.css">
 
+</head>
+<body>
 <nav>
     <div class="container-nav">
-        <a href="/" id="brand">WildLife Safari</a>
+        <div class="brand-container">
+            <div class="logo-container">
+                <img src="../site-images/logo.png" alt="WildLife Safari Logo">
+            </div>
+            <a href="/" id="brand">WildLife Safari</a>
+        </div>
+
         <button id="menu-toggle">
             <span></span>
             <span></span>
@@ -12,10 +27,35 @@
         <ul class="navbar-menu">
             <li><a href="/activities">Activities</a></li>
             <li><a href="#">Services</a></li>
-            <li><a href="#">About Us</a></li>
+            <li><a href="/about-us">About Us</a></li>
             <li><a href="/testimonials">Testimonials</a></li>
         </ul>
     </div>
 </nav>
 
-<script src="..../javascript/navbar.js"></script>
+
+
+<script>
+    // Mobile menu toggle
+    document.getElementById('menu-toggle').addEventListener('click', function() {
+        const menu = document.querySelector('.navbar-menu');
+        menu.classList.toggle('active');
+    });
+
+    // Hide navbar on scroll down, show on scroll up
+    let lastScrollTop = 0;
+    window.addEventListener('scroll', function() {
+        let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        const navbar = document.querySelector('nav');
+
+        if (scrollTop > lastScrollTop && scrollTop > 100) {
+            navbar.classList.add('scrollUp');
+        } else {
+            navbar.classList.remove('scrollUp');
+        }
+
+        lastScrollTop = scrollTop;
+    });
+</script>
+</body>
+</html>

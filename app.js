@@ -10,6 +10,8 @@ const bodyParser = require('body-parser');
 const pageRoutes = require('./routes/pageRoutes');
 const viewRoutes = require('./routes/viewRoutes');
 const homeRoutes = require('./routes/homeRoutes');
+const mediaRoutes = require('./routes/mediaRoutes');
+
 const typeDefs = require('./graphql/typeDefs');
 const resolvers = require('./graphql/resolvers');
 
@@ -43,6 +45,7 @@ async function startServer() {
     app.use('/', viewRoutes);
     app.use('/', homeRoutes);
     app.use('/', pageRoutes);
+    app.use('/', mediaRoutes);
 
     app.listen(1212, () => {
         console.log('Express server running at http://localhost:1212');

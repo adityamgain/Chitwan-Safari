@@ -13,6 +13,28 @@ const typeDefs = gql`
         stars: Int
         review: String
     }
+
+    type BookingResponse {
+        success: Boolean!
+        message: String!
+    }
+
+    input BookingInput {
+        fullName: String!
+        email: String!
+        phone: String!
+        country: String!
+        activities: [String!]!
+        startDate: String!
+        endDate: String!
+        preferredTime: String!
+        participants: Int!
+        specialRequirements: String
+    }
+
+    type Mutation {
+        bookAdventure(input: BookingInput!): BookingResponse!
+    }
 `;
 
 module.exports = typeDefs;

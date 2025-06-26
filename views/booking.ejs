@@ -1,14 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Book Your Adventure - Chitwan Adventures</title>
     <link rel="stylesheet" href="/css/booking.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-</head>
-<body>
+
 
     <section class="booking-hero">
         <div class="container">
@@ -110,6 +105,7 @@
                                     <small>1-2 hours</small>
                                 </label>
                             </div>
+
                         </div>
                     </div>
 
@@ -167,6 +163,48 @@
         document.getElementById('startDate').addEventListener('change', function() {
             document.getElementById('endDate').min = this.value;
         });
+
+
+        document.getElementById('bookingForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const formData = new FormData(this);
+
+            const input = {
+                fullName: formData.get('fullName'),
+                email: formData.get('email'),
+                phone: formData.get('phone'),
+                country: formData.get('country'),
+                activities: formData.getAll('activities'),
+                startDate: formData.get('startDate'),
+                endDate: formData.get('endDate'),
+                preferredTime: formData.get('preferredTime'),
+                participants: parseInt(formData.get('participants')),
+                specialRequirements: formData.get('specialRequirements')
+            };
+
+            const response = await fetch('/graphql', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    query: `
+          mutation BookAdventure($input: BookingInput!) {
+            bookAdventure(input: $input) {
+              success
+              message
+            }
+          }
+        `,
+                    variables: { input }
+                })
+            });
+
+            const result = await response.json();
+            if (result.data?.bookAdventure?.success) {
+                alert('✅ ' + result.data.bookAdventure.message);
+                this.reset();
+            } else {
+                alert('❌ ' + (result.data?.bookAdventure?.message || 'Unknown error'));
+            }
+        });
     </script>
-</body>
-</html>
+

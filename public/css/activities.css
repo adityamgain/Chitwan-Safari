@@ -7,16 +7,12 @@
     --white: #ffffff;
     --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     --transition: all 0.3s ease;
-
 }
-
-
 
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
 }
 
 body {
@@ -138,9 +134,11 @@ body {
     flex-direction: column;
     justify-content: space-between;
     position: relative;
+
 }
 
 .activity-title {
+    font-family: 'Poppins', sans-serif;
     font-size: 2.2rem;
     margin-bottom: 25px;
     color: var(--primary-color);
@@ -159,6 +157,7 @@ body {
 }
 
 .activity-description {
+    font-family: 'Poppins', sans-serif;
     color: #666;
     margin-bottom: 30px;
     font-size: 1.1rem;
@@ -213,8 +212,6 @@ body {
     transform: translateY(-3px);
     box-shadow: 0 5px 15px rgba(0,0,0,0.2);
 }
-
-
 
 .cta-section {
     text-align: center;

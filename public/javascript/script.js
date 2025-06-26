@@ -72,4 +72,45 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
+function openLightbox(src) {
+    const lightbox = document.getElementById("lightbox");
+    const lightboxImg = document.getElementById("lightbox-img");
+    lightboxImg.src = src;
+    lightbox.style.display = "flex";
+}
 
+function closeLightbox() {
+    document.getElementById("lightbox").style.display = "none";
+}
+
+document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape") {
+        closeLightbox();
+    }
+});
+
+document.addEventListener("DOMContentLoaded", function () {
+    const testimonials = document.querySelectorAll(".testimonial");
+    const prevBtn = document.querySelector(".slider-prev");
+    const nextBtn = document.querySelector(".slider-next");
+    let currentIndex = 0;
+
+    function showTestimonial(index) {
+        testimonials.forEach((testimonial, i) => {
+            testimonial.classList.remove("active");
+            if (i === index) {
+                testimonial.classList.add("active");
+            }
+        });
+    }
+
+    prevBtn.addEventListener("click", () => {
+        currentIndex = (currentIndex - 1 + testimonials.length) % testimonials.length;
+        showTestimonial(currentIndex);
+    });
+
+    nextBtn.addEventListener("click", () => {
+        currentIndex = (currentIndex + 1) % testimonials.length;
+        showTestimonial(currentIndex);
+    });
+});
