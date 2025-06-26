@@ -13,14 +13,21 @@
     "ejs-mate": "^4.0.0",
     "express": "^4.21.2",
     "express-ejs-layouts": "^2.5.1",
+    "fs": "^0.0.1-security",
     "graphql": "^16.11.0",
     "graphql-tag": "^2.12.6",
     "method-override": "^3.0.0",
+    "multer": "^2.0.1",
     "mysql2": "^3.14.1",
     "nodemailer": "^7.0.3",
     "path": "^0.12.7"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "@eslint/js": "^9.29.0",
+    "eslint": "^9.29.0",
+    "globals": "^16.2.0"
+  }
 }

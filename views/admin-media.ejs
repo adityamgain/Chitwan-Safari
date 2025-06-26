@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Media Management - Chitwan Adventures</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/admin-media.css">
+    <link rel="stylesheet" href="/css/navbar.css">
+</head>
+<body>
+<div class="admin-container">
+    <aside class="sidebar">
+        <h2>Chitwan Adventures</h2>
+        <nav>
+            <ul>
+                <li><a href="/admin/dashboard"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+                <li class="active"><a href="/admin/media"><i class="fas fa-images"></i> Media</a></li>
+                <li><a href="/admin/tours"><i class="fas fa-map-marked-alt"></i> Tours</a></li>
+                <li><a href="/admin/bookings"><i class="fas fa-calendar-check"></i> Bookings</a></li>
+            </ul>
+        </nav>
+    </aside>
+
+    <main class="main-content">
+        <header class="admin-header">
+            <h1>Media Management</h1>
+            <div class="user-controls">
+                <span>Welcome, Admin</span>
+                <a href="/logout" class="logout-btn"><i class="fas fa-sign-out-alt"></i></a>
+            </div>
+        </header>
+
+        <div class="media-management">
+            <!-- Upload Section -->
+            <section class="upload-section">
+                <h2>Upload New Media</h2>
+                <form id="upload-form" action="/admin/media/upload" method="POST" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label for="media-type">Media Type</label>
+                        <select id="media-type" name="mediaType" required>
+                            <option value="">Select type</option>
+                            <option value="image">Image</option>
+                            <option value="video">Video</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="media-files">Files</label>
+                        <input type="file" id="media-files" name="mediaFiles" multiple required>
+                        <p class="hint">Supports: JPG, PNG, GIF, MP4, WEBM (Max 50MB each)</p>
+                    </div>
+
+                    <button type="submit" class="btn btn-upload">
+                        <i class="fas fa-cloud-upload-alt"></i> Upload Files
+                    </button>
+                </form>
+            </section>
+
+            <!-- Media List Section -->
+            <section class="media-list-section">
+                <div class="media-controls">
+                    <h2>Manage Media Files</h2>
+                    <div class="filter-controls">
+                        <select id="media-filter" class="filter-select">
+                            <option value="all">All Media</option>
+                            <option value="images">Images Only</option>
+                            <option value="videos">Videos Only</option>
+                        </select>
+                        <input type="text" id="media-search" placeholder="Search by filename...">
+                    </div>
+                </div>
+
+                <div class="media-grid">
+                    <% if (mediaItems.length > 0) { %>
+                        <% mediaItems.forEach(item => { %>
+                            <div class="media-card" data-filename="<%= item.filename %>" data-type="<%= item.type %>">
+                                <div class="media-preview">
+                                    <% if (item.type === 'image') { %>
+                                        <img src="/images/<%= item.filename %>" alt="<%= item.filename %>">
+                                    <% } else { %>
+                                        <video>
+                                            <source src="/videos/<%= item.filename %>" type="video/<%= item.ext %>">
+                                        </video>
+                                        <div class="video-icon"><i class="fas fa-play"></i></div>
+                                    <% } %>
+                                    <div class="media-actions">
+                                        <button class="btn-action btn-delete" title="Delete">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="media-info">
+                                    <h3><%= item.filename %></h3>
+                                    <p class="media-meta">
+                                        <span><i class="fas fa-file"></i> <%= item.type %></span>
+                                        <span><i class="fas fa-calendar-alt"></i> <%= item.uploadDate %></span>
+                                    </p>
+                                    <p class="media-size"><%= (item.size / 1024 / 1024).toFixed(2) %> MB</p>
+                                </div>
+                            </div>
+                        <% }) %>
+                    <% } else { %>
+                        <div class="no-media">
+                            <i class="fas fa-images"></i>
+                            <p>No media files found</p>
+                        </div>
+                    <% } %>
+                </div>
+
+                <!-- Pagination -->
+                <% if (totalPages > 1) { %>
+                    <div class="pagination">
+                        <% if (currentPage > 1) { %>
+                            <a href="?page=<%= currentPage - 1 %>&filter=<%= currentFilter %>" class="page-link prev">
+                                <i class="fas fa-chevron-left"></i> Prev
+                            </a>
+                        <% } else { %>
+                            <span class="page-link prev disabled">
+                                    <i class="fas fa-chevron-left"></i> Prev
+                                </span>
+                        <% } %>
+
+                        <div class="page-numbers">
+                            <% for (let i = 1; i <= totalPages; i++) { %>
+                                <% if (i === currentPage) { %>
+                                    <span class="page-link current"><%= i %></span>
+                                <% } else { %>
+                                    <a href="?page=<%= i %>&filter=<%= currentFilter %>" class="page-link"><%= i %></a>
+                                <% } %>
+                            <% } %>
+                        </div>
+
+                        <% if (currentPage < totalPages) { %>
+                            <a href="?page=<%= currentPage + 1 %>&filter=<%= currentFilter %>" class="page-link next">
+                                Next <i class="fas fa-chevron-right"></i>
+                            </a>
+                        <% } else { %>
+                            <span class="page-link next disabled">
+                                    Next <i class="fas fa-chevron-right"></i>
+                                </span>
+                        <% } %>
+                    </div>
+                <% } %>
+            </section>
+        </div>
+    </main>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // DOM Elements
+        const mediaFilter = document.getElementById('media-filter');
+        const mediaSearch = document.getElementById('media-search');
+        const mediaGrid = document.querySelector('.media-grid');
+        const uploadForm = document.getElementById('upload-form');
+
+        // Initialize
+        initEventListeners();
+        initMediaCards();
+
+        function initEventListeners() {
+            // Filter and search
+            if (mediaFilter) mediaFilter.addEventListener('change', filterMedia);
+            if (mediaSearch) mediaSearch.addEventListener('input', filterMedia);
+
+            // Upload form
+            if (uploadForm) {
+                uploadForm.addEventListener('submit', handleUploadSubmit);
+            }
+        }
+
+        function initMediaCards() {
+            const mediaCards = document.querySelectorAll('.media-card');
+            if (!mediaCards) return;
+
+            mediaCards.forEach(card => {
+                const deleteBtn = card.querySelector('.btn-delete');
+                if (deleteBtn) {
+                    deleteBtn.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        handleDeleteMedia(card);
+                    });
+                }
+            });
+        }
+
+        function filterMedia() {
+            const filterValue = mediaFilter ? mediaFilter.value.toLowerCase() : 'all';
+            const searchValue = mediaSearch ? mediaSearch.value.toLowerCase() : '';
+            const mediaCards = document.querySelectorAll('.media-card');
+
+            mediaCards.forEach(card => {
+                const type = card.dataset.type; // 'image' or 'video'
+                const filename = card.querySelector('h3')?.textContent.toLowerCase() || '';
+
+                const matchesFilter = filterValue === 'all' ||
+                    (filterValue === 'images' && type === 'image') ||
+                    (filterValue === 'videos' && type === 'video');
+
+                const matchesSearch = searchValue === '' || filename.includes(searchValue);
+
+                card.style.display = matchesFilter && matchesSearch ? 'block' : 'none';
+            });
+        }
+
+        function handleUploadSubmit(e) {
+            const filesInput = document.getElementById('media-files');
+            if (!filesInput || filesInput.files.length === 0) {
+                e.preventDefault();
+                showAlert('Please select at least one file to upload.', 'error');
+            }
+        }
+
+        async function handleDeleteMedia(card) {
+            if (!card) return;
+
+            const filename = card.dataset.filename;
+            const type = card.dataset.type; // 'image' or 'video'
+
+            // Validation
+            if (!filename || !type) {
+                showAlert('Missing file information.', 'error');
+                return;
+            }
+
+            if (!isValidFilename(filename)) {
+                showAlert('Invalid filename format.', 'error');
+                return;
+            }
+
+            if (!confirm('Are you sure you want to delete this media file? This action cannot be undone.')) {
+                return;
+            }
+
+            try {
+                showAlert('Deleting file...', 'info');
+
+                // Convert to directory name expected by backend
+                const directory = type === 'image' ? 'images' : 'videos';
+                const response = await sendDeleteRequest(filename, directory);
+
+                if (!response.ok) {
+                    const errorData = await response.json();
+                    throw new Error(errorData.message || 'Failed to delete file');
+                }
+
+                animateCardRemoval(card);
+                showAlert('File deleted successfully!', 'success');
+                updateMediaStats();
+
+            } catch (error) {
+                console.error('Delete error:', error);
+                showAlert(`Error: ${error.message}`, 'error');
+            }
+        }
+
+        async function sendDeleteRequest(filename, directory) {
+            return await fetch(`/admin/media/delete?filename=${encodeURIComponent(filename)}&type=${encodeURIComponent(directory)}`, {
+                method: 'DELETE',
+                headers: {
+                    'Accept': 'application/json'
+                }
+            });
+        }
+
+        function animateCardRemoval(card) {
+            card.style.transition = 'opacity 0.3s ease';
+            card.style.opacity = '0';
+            setTimeout(() => card.remove(), 300);
+        }
+
+        function isValidFilename(filename) {
+            return /^[\w\-\.]+$/.test(filename) &&
+                !filename.includes('..') &&
+                !filename.includes('/') &&
+                !filename.includes('\\');
+        }
+
+        function showAlert(message, type = 'info') {
+            // Remove existing alerts
+            const existingAlert = document.querySelector('.custom-alert');
+            if (existingAlert) existingAlert.remove();
+
+            // Create alert element
+            const alertDiv = document.createElement('div');
+            alertDiv.className = `custom-alert alert-${type}`;
+            alertDiv.textContent = message;
+
+            // Style the alert
+            Object.assign(alertDiv.style, {
+                position: 'fixed',
+                top: '20px',
+                right: '20px',
+                padding: '15px 25px',
+                borderRadius: '5px',
+                color: 'white',
+                zIndex: '1000',
+                boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
+                opacity: '0',
+                transition: 'opacity 0.3s ease',
+                backgroundColor: getAlertColor(type)
+            });
+
+            document.body.appendChild(alertDiv);
+
+            // Animate
+            setTimeout(() => alertDiv.style.opacity = '1', 10);
+            setTimeout(() => {
+                alertDiv.style.opacity = '0';
+                setTimeout(() => alertDiv.remove(), 300);
+            }, 3000);
+        }
+
+        function getAlertColor(type) {
+            const colors = {
+                success: '#28a745',
+                error: '#dc3545',
+                info: '#17a2b8',
+                warning: '#ffc107'
+            };
+            return colors[type] || '#6c757d';
+        }
+
+        function updateMediaStats() {
+            const statsElement = document.querySelector('.media-stats');
+            if (!statsElement) return;
+
+            const remainingItems = document.querySelectorAll('.media-card:not([style*="display: none"])').length;
+            const filterValue = mediaFilter ? mediaFilter.value.toLowerCase() : 'all';
+
+            let message = `Showing ${remainingItems} `;
+            message += filterValue === 'images' ? 'images' :
+                filterValue === 'videos' ? 'videos' :
+                    'media items';
+
+            statsElement.textContent = message;
+        }
+    });
+
+</script>
+</body>
+</html>

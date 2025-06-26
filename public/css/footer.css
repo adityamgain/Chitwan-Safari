@@ -7,7 +7,21 @@
     --footer-white: #ffffff;
     --footer-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     --footer-transition: all 0.3s ease;
+}
 
+/* Body and HTML setup for sticky footer */
+html {
+    height: 100%;
+}
+
+body {
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.main-content {
+    flex: 1 0 auto;
 }
 
 /* Footer Styles */
@@ -17,6 +31,8 @@
     padding: 5rem 0 0;
     position: relative;
     overflow: hidden;
+    flex-shrink: 0;
+    width: 100%;
 }
 
 .footer::before {
